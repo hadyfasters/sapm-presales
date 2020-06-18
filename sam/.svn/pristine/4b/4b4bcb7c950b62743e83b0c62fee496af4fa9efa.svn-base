@@ -1,0 +1,159 @@
+<!-- page content -->
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row" style="display: inline-block;" >
+    <div class="tile_count">
+        <div class="col-md-12 col-sm-12 tile_stats_count">
+            <div class="count">Menu Setting</div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="listUser">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel" style="border-radius: 8px">
+            <div class="x_title">
+                <h2>Menu Management</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form id="formInputListUser" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-2 col-sm-2 label-align" for="userposition" style="width: 200%">List User</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <select style="border-radius: 6px; color: #495057;" id="userposition" name="userposition" class="form-control" data-error=".errorTxt1" >
+                                <option value="">Pilih..</option>
+                                <option value="sales">Sales</option>
+                                <option value="spv1">Supervisor 1</option>
+                                <option value="spv2">Supervisor 2</option>
+                                <option value="spv3">Supervisor 3</option>
+                            </select>
+                            <div class="errorTxt1" style="color:red"></div>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-2 col-sm-2 offset-md-2">
+                            <button class="btn btn-success" type="submit" value="Submit" id="btnSubmitList" form="formInputListUser">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="UserSelected">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel" style="border-radius: 8px">
+            <div class="x_title">
+                <h2>User Position</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row" style="margin-top: -10px">
+                    <div class="col">
+                        <h1 style="font-size: 27px;"><span class="badge badge-success" id="selected"></span></h1>
+                    </div>
+                </div>
+                <form id="formMenu">
+                    <div class="row mt-3">
+                        <div class="col-md-12 col-sm-12">
+                            <h5> Menu: </h5>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="parentMenu1">
+                                <label class="form-check-label" for="parentMenu1">
+                                    Dashboard
+                                </label>
+                            </div>
+                            <div class="mt-2 ml-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu1child1">
+                                    <label class="form-check-label" for="Menu1child1">
+                                        Produk Chart
+                                    </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu1child2">
+                                    <label class="form-check-label" for="Menu1child2">
+                                        Proses Chart
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="parentMenu2">
+                                <label class="form-check-label" for="parentMenu2">
+                                    Input and View
+                                </label>
+                            </div>
+                            <div class="mt-2 ml-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu2child1">
+                                    <label class="form-check-label" for="Menu2child1">
+                                        Lead
+                                    </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu2child2">
+                                    <label class="form-check-label" for="Menu2child2">
+                                        Call
+                                    </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu2child3">
+                                    <label class="form-check-label" for="Menu2child3">
+                                        Meet
+                                    </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu2child4">
+                                    <label class="form-check-label" for="Menu2child4">
+                                        Close
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="parentMenu3">
+                                <label class="form-check-label" for="parentMenu3">
+                                    Outlet Management
+                                </label>
+                            </div>
+                            <div class="mt-2 ml-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu3child1">
+                                    <label class="form-check-label" for="Menu3child1">
+                                        Wilayah
+                                    </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="Menu3child2">
+                                    <label class="form-check-label" for="Menu3child2">
+                                        Cabang
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                    <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-1 col-sm-1 offset-md-1">
+                                <button class="btn btn-success" type="submit" value="Submit" form="formMenu">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- /top tiles -->
+    <br />
+</div>
+<!-- /page content-->

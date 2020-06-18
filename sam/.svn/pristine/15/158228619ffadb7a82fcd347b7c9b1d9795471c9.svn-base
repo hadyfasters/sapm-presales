@@ -1,0 +1,80 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Login extends SAM_Controller {
+
+    public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('form');
+	}
+
+	public function index()
+	{
+        $data['auth_token'] = getAuthToken();
+        $data['error_message'] = $this->session->flashdata('error_message');
+        $data['login'] = 'login/process';
+        $data['attributes'] = array('class' => 'col s12', 'id' => 'login-form', 'method' => 'post');
+		$this->load->view('login', $data);
+    }
+    
+    public function process(){
+        extract($this->input->post());
+
+        $dataPost = [
+            'username' => $npp,
+            'password' => $password,
+            'auth_token' => $auth_token
+        ];
+
+        // Secure the Token
+        $xAuthToken = $this->secure($dataPost);
+
+        // Post a Secure data
+        $login = $this->client_url->postCURL(AUTH_LOGIN_CHECK, $this->secure($dataPost), $auth_token);
+
+        // Decrypt the response
+        $login = json_decode($this->recure($login));
+
+        // Check response status
+        if($login->status && isset($login->status))
+        {
+            $data_login = array(
+                'id_user' => $login->data->id_user,
+                'npp' => $login->data->npp,
+                'nama' => $login->data->nama,
+                'job' => $login->data->job,
+                'branch_code' => $login->data->branch_code,
+                'level' => $login->data->level,
+                'is_loggedin' => TRUE
+            );
+            $this->session->set_userdata('data_login', $data_login);
+
+            $menuFilter = [
+                'position' => $login->data->job_id,
+                'level' => $login->data->level,
+                'auth_token' => $login->samtk
+            ];
+            $menu = $this->client_url->postCURL(MENU_LIST, $this->secure($menuFilter), $login->samtk);
+            $menu = json_decode($this->recure($menu));
+
+            $this->session->set_userdata('menu_list', $menu->data);
+            redirect('dashboard');
+        }
+        else
+        {
+            $this->session->set_flashdata('error_message', 'Username or password is wrong');
+            $data['error_message'] = $this->session->flashdata('error_message');
+            redirect('login');
+        }        
+    }
+
+    public function out()
+    {
+        unset(
+            $_SESSION['data_login'],
+            $_SESSION['menu_list']
+        );
+        redirect('login');
+    }
+}

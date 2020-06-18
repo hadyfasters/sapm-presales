@@ -1,0 +1,31 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Menu extends CI_Controller {
+
+    public function __construct()
+	{
+		parent::__construct();
+		// $this->load->helper('form');
+		$this->load->library('session');
+        $this->load->model('M_menu');       
+        // $this->load->model('M_login');       
+	}
+
+	public function index()
+	{
+        $data['userdata'] = $this->session->userdata('data_login');
+        $data['menu_parent'] = $this->M_menu->getMenuParentByRole((int)$data['userdata']['id_role']);
+        $data['content'] = 'menumanagement/menu-management';
+
+        $data['javascriptLoad'] = array(
+            0 => 'assets/vendors/iCheck/icheck.min.js',
+            1 => 'assets/build/js/jquery.validate.min.js',
+            2 => 'assets/build/js/menu.js'
+        );
+
+        $this->load->view('template', $data);
+    }
+
+    
+}

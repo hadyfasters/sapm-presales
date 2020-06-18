@@ -1,0 +1,29 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class SAM_Controller extends CI_Controller{
+    protected $data;
+    protected $menulist;
+
+    public function __construct(){
+        parent::__construct();
+        $this->load->library('session');
+        $this->load->library('client_url');
+        $this->data['userdata'] = $this->session->userdata('data_login');
+        $this->data['menulist'] = $this->session->userdata('menu_list');
+    }
+
+    public function secure($input)
+    {
+        $result = $this->encryption->sam_encrypt($input);
+
+        return $result;
+    }
+
+    public function recure($input)
+    {
+        $result = $this->encryption->sam_decrypt($input);
+
+        return $result;
+    }
+}
