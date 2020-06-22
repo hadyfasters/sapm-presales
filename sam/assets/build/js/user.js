@@ -96,9 +96,9 @@ function formInputUserValidation(){
                 error.insertAfter(element);
             }
         },
-        submitHandler: function(form) {
-            alert("submitted");
-            console.log(form);
+        // submitHandler: function(form) {
+        //     alert("submitted");
+        //     console.log(form);
         //     $.ajax({
         //         url : '/' + base_url[1] + '/' + base_url[2] + '/meeting/save',
         //         type: 'POST',
@@ -124,7 +124,7 @@ function formInputUserValidation(){
         //             $('#modalAdd').modal('close');
         //         }
         //     });
-        }
+        // }
     });
 }
 
@@ -180,10 +180,10 @@ function formEditUserValidation(){
                 error.insertAfter(element);
             }
         },
-        submitHandler: function(form) {
-            alert("submitted");
-            console.log(form);
-        }
+        // submitHandler: function(form) {
+        //     alert("submitted");
+        //     console.log(form);
+        // }
     });
 }
 
