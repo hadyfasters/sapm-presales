@@ -10,12 +10,28 @@ class User extends SAM_Controller {
 		$this->load->library('session'); 
 
         if(!$this->isLogin){
-            redirect('login/logout');
+            redirect('login/out');
         }  
 	}
 
 	public function index()
 	{
+        $dt_user = [
+            'level' => $this->data['userdata']['level']
+        ];
+        $users = $this->client_url->postCURL(USER_LIST,$this->secure($dt_user),$this->data['userdata']['token']); 
+        $users = json_decode($users);
+        if($users!=null && !isset($users->status)){
+            // Decrypt the response
+            $users = json_decode($this->recure($users));
+        }
+
+        // var_dump($users);exit;
+        if(isset($users->status) && $users->status)
+        {
+            $this->data['user_list'] = $users->data;
+        }
+
         $this->data['content'] = 'usermanagement/list-user';
 
         $this->data['javascriptLoad'] = array(
@@ -98,9 +114,61 @@ class User extends SAM_Controller {
         $this->load->view('template', $this->data);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $this->data['auth_token'] = $this->getAuthToken();
+
+        $userToken = $this->data['userdata']['token'];
+
+        $region = $this->client_url->postCURL(REGION_LIST,'',$userToken); 
+        $region = json_decode($region);
+        if($region!=null && !isset($region->status)){
+            // Decrypt the response
+            $region = json_decode($this->recure($region));
+        }
+        if(isset($region->status) && $region->status)
+        {
+            $this->data['region_list'] = $region->data;
+        }
+
+        $branch = $this->client_url->postCURL(BRANCH_LIST,'',$userToken);  
+        $branch = json_decode($branch);
+        if($branch!=null && !isset($branch->status)){
+            // Decrypt the response
+            $branch = json_decode($this->recure($branch));
+        }
+        if(isset($branch->status) && $branch->status)
+        {
+            $this->data['branch_list'] = $branch->data;
+        }
+
+        $dt_user = [
+            'level' => $this->data['userdata']['level'],
+            'status' => 1
+        ];
+        $userposition = $this->client_url->postCURL(USERPOSITION_LIST,$this->secure($dt_user),$userToken); 
+        $userposition = json_decode($userposition);
+        if($userposition!=null && !isset($userposition->status)){
+            // Decrypt the response
+            $userposition = json_decode($this->recure($userposition));
+        }
+
+        if(isset($userposition->status) && $userposition->status)
+        {
+            $this->data['userposition_list'] = $userposition->data;
+        }
+
+        $this->data['id'] = $id;
+        $user = $this->client_url->postCURL(USER_GET,$this->secure(array('id'=>$id)),$this->data['userdata']['token']);
+        $user = json_decode($user);
+
+        if($user!=null && !isset($user->status)){
+            // Decrypt the response
+            $user = json_decode($this->recure($user));
+        }
+
+        $this->data['data'] = $user->data;
+        
+        $this->data['error_message'] = $this->session->flashdata('error_message');
         $this->data['content'] = 'usermanagement/edit-user';
 
         $this->data['javascriptLoad'] = array(
@@ -109,5 +177,61 @@ class User extends SAM_Controller {
         );
 
         $this->load->view('template', $this->data);
+    }
+
+    public function add_process()
+    {
+        extract($this->input->post());
+        $dt_user = [
+            'npp' => $npp,
+            'nama' => $nama,
+            'region' => $wilayah,
+            'branch' => $cabang,
+            'position' => $jabatan,
+            'status' => 1
+        ];
+        $user = $this->client_url->postCURL(USER_CREATE,$this->secure($dt_user),$this->data['userdata']['token']); 
+        $user = json_decode($user);
+
+        if($user!=null && !isset($user->status)){
+            // Decrypt the response
+            $user = json_decode($this->recure($user));
+        }
+
+        if(isset($user->status) && !$user->status)
+        {
+            $this->session->set_flashdata('error_message', $user->message);
+            redirect('user/add');
+        }
+        redirect('user');
+    }
+
+    public function edit_process()
+    {
+        extract($this->input->post());
+        $dt_user = [
+            'id' => $id,
+            'npp' => $npp,
+            'nama' => $nama,
+            'region' => $wilayah,
+            'branch' => $cabang,
+            'position' => $jabatan,
+            'status' => $status,
+            'user' => $this->data['userdata']['nama']
+        ];
+
+        $user = $this->client_url->postCURL(USER_UPDATE,$this->secure($dt_user),$this->data['userdata']['token']); 
+        $user = json_decode($user);    
+
+        if($user!=null && !isset($user->status)){
+            // Decrypt the response
+            $user = json_decode($this->recure($user));
+        }   
+        if(isset($user->status) && !$user->status)
+        {
+            $this->session->set_flashdata('error_message', $user->message);
+            redirect('user/edit/'.$user->$id);
+        }
+        redirect('user');
     }
 }

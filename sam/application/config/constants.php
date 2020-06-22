@@ -93,6 +93,7 @@ define('SAM_API_URL','localhost/sam_api/api/');
 // Endpoint LOGIN
 define('AUTH_TOKEN_PATH','auth/token');
 define('AUTH_LOGIN_CHECK','auth/check');
+define('AUTH_CAPTCHA','auth/captcha');
 
 // Endpoint MENU
 define('MENU_LIST','menu/lists');
@@ -127,3 +128,17 @@ define('PERMISSION_GET','menu_permission/get');
 define('PERMISSION_LIST','menu_permission/lists');
 define('PERMISSION_CREATE','menu_permission/create');
 define('PERMISSION_UPDATE','menu_permission/update');
+
+// Endpoint USER
+define('USER_GET','user/get');
+define('USER_LIST','user/lists');
+define('USER_CREATE','user/create');
+define('USER_UPDATE','user/update');
+
+// Endpoint ADDRESS
+define('PROVINCE_LIST','address/list_province');
+define('REGENCY_LIST','address/list_regency');
+define('DISTRICT_LIST','address/list_district');
+
+// Endpoint USER HISTORY
+define('USERHISTORY_LIST','user/history_lists');

@@ -21,7 +21,7 @@
                     <p class="text-center" style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
                 <form id="formInputOutletCabang" method="POST" action="<?php echo site_url('outlet/add_process_cabang'); ?>" data-parsley-validate class="form-horizontal form-label-left">
-                    <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>">
+                    <!-- <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>"> -->
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kodecabang">Kode Cabang</label>
                         <div class="col-md-6 col-sm-6 ">
@@ -43,7 +43,7 @@
                                 <option value="">Pilih Wilayah</option>
                                 <?php if(isset($region_list) && !empty($region_list)) : 
                                     foreach ($region_list as $reg) {
-                                        echo '<option value"'.$reg->id_region.'">['.$reg->code.'] '.$reg->name.'</option>';
+                                        echo '<option value="'.$reg->id_region.'">['.$reg->code.'] '.$reg->name.'</option>';
                                     }
                                 endif; ?>
                             </select>
@@ -67,7 +67,7 @@
                     <div class="ln_solid"></div>
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 offset-md-3">
-                            <button class="btn btn-secondary" type="button" value="Cancel" id="btnCancel" form="formInputOutletCabang">Cancel</button>
+                            <a class="btn btn-secondary" href="<?php echo site_url('outlet/cabang'); ?>" value="Cancel" id="btnCancel" form="formInputOutletWilayah">Cancel</a>
                             <button class="btn btn-success" type="submit" value="Submit" form="formInputOutletCabang">Submit</button>
                         </div>
                     </div>

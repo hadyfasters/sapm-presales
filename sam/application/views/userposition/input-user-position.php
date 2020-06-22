@@ -21,7 +21,6 @@
                     <p class="text-center" style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
                 <form id="formInputUserPosition" method="POST" action="<?php echo site_url('userposition/add_process'); ?>" data-parsley-validate class="form-horizontal form-label-left">
-                    <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>">
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="userposition">User</label>
                         <div class="col-md-6 col-sm-6 ">

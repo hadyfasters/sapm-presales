@@ -13,22 +13,23 @@
     <div class="col-md-12 col-sm-12">
         <div class="x_panel" style="border-radius: 8px">
             <div class="x_title">
-                <h2 class="font-weight-bold" style="font-size: 2em">Form Create User</h2>
+                <h2 class="font-weight-bold" style="font-size: 2em">Form Edit User</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <form id="formInputUser" method="POST" action="<?php echo site_url('user/add_process'); ?>" data-parsley-validate class="form-horizontal form-label-left">
+                <form id="formInputUser" method="POST" action="<?php echo site_url('user/edit_process'); ?>" data-parsley-validate class="form-horizontal form-label-left">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="npp">NPP</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="npp" name="npp" class="form-control" style="border-radius: 6px" placeholder="NPP" data-error=".errorTxt1">
+                            <input type="text" id="npp" name="npp" class="form-control" style="border-radius: 6px" placeholder="NPP" data-error=".errorTxt1" value="<?php echo $data->npp; ?>">
                             <div class="errorTxt1" style="color:red"></div>
                         </div>
                     </div>
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Nama</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="nama" name="nama" class="form-control" style="border-radius: 6px" placeholder="Nama" data-error=".errorTxt2">
+                            <input type="text" id="nama" name="nama" class="form-control" style="border-radius: 6px" placeholder="Nama" data-error=".errorTxt2" value="<?php echo $data->nama; ?>">
                             <div class="errorTxt2" style="color:red"></div>
                         </div>
                     </div>
@@ -40,7 +41,8 @@
                                 <?php 
                                 if(isset($region_list)) : 
                                     foreach ($region_list as $wil) {
-                                        echo '<option value="'.$wil->id_region.'">['.strtoupper($wil->code).'] '.$wil->name.'</option>';
+                                        $selected = ($wil->id_region==$data->id_region)?'selected':'';
+                                        echo '<option value="'.$wil->id_region.'" '.$selected.'>['.strtoupper($wil->code).'] '.$wil->name.'</option>';
                                     }
                                 endif 
                                 ?>
@@ -56,7 +58,8 @@
                                 <?php 
                                 if(isset($branch_list)) : 
                                     foreach ($branch_list as $branch) {
-                                        echo '<option value="'.$branch->id_branch.'">['.strtoupper($branch->code).'] '.$branch->name.'</option>';
+                                        $selected = ($branch->id_branch==$data->id_branch)?'selected':'';
+                                        echo '<option value="'.$branch->id_branch.'" '.$selected.'>['.strtoupper($branch->code).'] '.$branch->name.'</option>';
                                     }
                                 endif 
                                 ?>
@@ -72,7 +75,8 @@
                                 <?php 
                                 if(isset($userposition_list)) : 
                                     foreach ($userposition_list as $userpos) {
-                                        echo '<option value="'.$userpos->up_id.'">'.$userpos->up_name.'</option>';
+                                        $selected = ($userpos->up_id==$data->position)?'selected':'';
+                                        echo '<option value="'.$userpos->up_id.'" '.$selected.'>'.$userpos->up_name.'</option>';
                                     }
                                 endif 
                                 ?>
@@ -85,12 +89,12 @@
                         <div class="col-md-6 col-sm-6 ">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" class="userstatus" name="status" data-error=".errorTxt3" value="1"> Aktif
+                                    <input type="radio" class="userstatus" name="status" data-error=".errorTxt3" value="1" <?php echo ($data->is_active=='1'?'checked':''); ?>> Aktif
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" class="userstatus" name="status" data-error=".errorTxt3" value="0"> Tidak Aktif
+                                    <input type="radio" class="userstatus" name="status" data-error=".errorTxt3" value="0" <?php echo ($data->is_active=='0'?'checked':''); ?>> Tidak Aktif
                                 </label>
                             </div>
                             <div class="errorTxt3" style="color:red"></div>

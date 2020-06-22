@@ -15,19 +15,9 @@ class SAM_Controller extends CI_Controller{
             if(time() < $this->session->userdata('data_login')['expired']){
                 $this->isLogin = TRUE;
                 $this->data['userdata'] = $this->session->userdata('data_login');
-                $this->data['menulist'] = $this->getMenu($this->data['userdata']); //$$this->session->userdata('menu_list');
+                $this->data['menulist'] = $this->getMenu($this->data['userdata']);
             }
         }
-    }
-
-    public function getAuthToken()
-    {
-        $response = $this->client_url->getCURL(AUTH_TOKEN_PATH);
-        $response = json_decode($response);
-        if($response != null && !isset($response->auth_token))
-            $response = json_decode($this->recure($response));
-
-        return $response->auth_token;
     }
 
     public function getMenu($data)

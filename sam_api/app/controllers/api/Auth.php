@@ -7,6 +7,7 @@ class Auth extends SAM_Controller {
 	{
 		parent::__construct();
         $this->load->model('M_users');  
+        $this->load->model('M_captcha');  
 	}
 
 	public function check()
@@ -19,10 +20,10 @@ class Auth extends SAM_Controller {
 			$request = json_decode($this->encryption->sam_decrypt(file_get_contents('php://input')));
 
 		if($request) {
-			// Verify Auth Token
-			$this->is_verified = $this->verify_token('auth_'.$request->auth_token);
+			$this->M_captcha->removeOld();
 
-			if($this->is_verified){
+			$checkCaptcha = $this->M_captcha->getCaptcha($request);
+			if($checkCaptcha){
 				$user = $this->M_users->getDataUser($request->username);
 
 				// Default Login Failed Message
@@ -47,9 +48,9 @@ class Auth extends SAM_Controller {
 							'id_user' => $user->id_user,
 							'npp' => $user->npp,
 							'nama' => $user->nama,
-							'job' => $user->up_name,
+							'job' => $user->position_name,
 							'job_id' => $user->position,
-							'level' => $user->up_level,
+							'level' => $user->level,
 							'branch_code' => $user->branch_code
 						];
 
@@ -64,9 +65,12 @@ class Auth extends SAM_Controller {
 						// Add token expired to response
 						$this->response['data']['expired'] = $token_expired;
 					}
-					// Destroy auth token
-					$this->destroy_token('auth_'.$request->auth_token);
 				}
+			}else{
+				// Set Response Status
+				$this->response['status'] = FALSE;
+				// Captcha Failed Message
+				$this->response['message'] = 'You must submit the word that appears in the image.';
 			}
 		}
 
@@ -87,6 +91,30 @@ class Auth extends SAM_Controller {
 
 		// Run the Application
 		$this->run(SECURED);
+	}
+
+	public function captcha()
+	{
+		// Get Plain Request
+		$request = json_decode(file_get_contents('php://input'));
+
+		if($request==null)
+			// Get Secured Request
+			$request = json_decode($this->encryption->sam_decrypt(file_get_contents('php://input')));
+
+		$input = $this->M_captcha->save($request);
+
+		if($input){
+			// Set Response Code
+			$this->response_code = 200;
+
+			// Set Response Status
+			$this->response['status'] = TRUE;
+		}
+
+		// Run the Application
+		$this->run(SECURED);
+
 	}
 
 }

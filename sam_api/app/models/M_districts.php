@@ -33,6 +33,18 @@ class M_districts extends SAM_Model {
         }
     }
 
+    public function getByRegency($id)
+    {
+        $this->_where = "regency_id = {$id}";
+
+        $result = $this->_get();
+
+        if ($result->num_rows() > 0) 
+        {
+            return $result->result();
+        }
+    }
+
 }
 
 

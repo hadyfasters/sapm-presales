@@ -41,19 +41,21 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
-                                        <h5 class="card-title-right mb-5">Login</h5>
+                                        <h5 class="card-title-right mb-4">Login</h5>
                                         <?php if ($error_message): ?>
-                                        <div style="margin-top: -20px;">
-                                            <p class="mt-0 mb-2" style="color: red;"><?php echo $error_message; ?></p>
-                                        </div>
+                                            <p class="text-center" style="color: red;"><?php echo $error_message; ?></p>
                                         <?php endif; ?>
                                         <?php echo form_open($login, $attributes); ?>
-                                        	<input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" id="npp" name="npp" aria-describedby="emailHelp" placeholder="NPP" style="border-radius: 6px;">
+                                                <input type="text" class="form-control" id="npp" name="npp" aria-describedby="emailHelp" placeholder="NPP" style="border-radius: 6px;" required>
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" style="border-radius: 6px;">
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" style="border-radius: 6px;" required>
+                                            </div>
+                                            <div class="form-group">
+                                            	<label for="captcha">Submit the code you see below : 
+                                            		<?php echo $captcha_img; ?></label>
+                                                <input type="text" class="form-control input-sm" name="captcha" id="captcha" style="border-radius: 6px;" placeholder="Enter the Code" required>
                                             </div>
 
                                             <button class="btn btn-primary btn-block" style="border-radius: 6px;">Submit</button>

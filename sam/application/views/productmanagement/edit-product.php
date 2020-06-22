@@ -19,7 +19,7 @@
             <div class="x_content">
                 <form id="formEditProduct" method="POST" action="<?php echo site_url('product/edit_process'); ?>" data-parsley-validate class="form-horizontal form-label-left">
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
-                    <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>">
+                    <!-- <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>"> -->
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="productname">Nama Produk</label>
                         <div class="col-md-6 col-sm-6 ">
@@ -54,7 +54,7 @@
                     <div class="ln_solid"></div>
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 offset-md-3">
-                            <button class="btn btn-secondary" type="button" value="Cancel" id="btnCancel" form="formEditProduct">Cancel</button>
+                            <a class="btn btn-secondary" type="button" href="<?php echo site_url('product'); ?>" value="Cancel" id="btnCancel" form="formEditProduct">Cancel</a>
                             <button class="btn btn-success" type="submit" value="Submit" form="formEditProduct">Save</button>
                         </div>
                     </div>

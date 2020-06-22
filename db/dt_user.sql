@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-06-18 17:22:10
+Date: 2020-06-22 12:10:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,14 +23,15 @@ CREATE TABLE `dt_user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `npp` varchar(50) NOT NULL,
   `password` varchar(125) NOT NULL,
-  `nama` varchar(150) DEFAULT NULL,
+  `nama` varchar(150) NOT NULL,
   `position` int(5) NOT NULL,
   `branch_code` mediumint(5) NOT NULL,
-  `active` bit(1) NOT NULL,
+  `is_active` int(1) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of dt_user
 -- ----------------------------
-INSERT INTO `dt_user` VALUES ('1', '80667', '$2y$10$DwJ5xdSkvRfBI9AY0keqM.ZysPCyUHPU3WCNivsxWakzExszVXOZK', 'Muhammad Hadiansyah', '1', '1', '');
+INSERT INTO `dt_user` VALUES ('1', '80667', '$2y$10$DwJ5xdSkvRfBI9AY0keqM.ZysPCyUHPU3WCNivsxWakzExszVXOZK', 'Muhammad Hadiansyah', '1', '1', '1');
+INSERT INTO `dt_user` VALUES ('2', '81824', '', 'Dherry Sasono', '2', '4', '1');

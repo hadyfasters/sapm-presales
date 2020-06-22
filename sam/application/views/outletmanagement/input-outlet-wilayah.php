@@ -1,4 +1,4 @@
-<!-- page content -->
+ page content -->
 <div class="right_col" role="main">
     <!-- top tiles -->
     <!-- <div class="row" style="display: inline-block;" >
@@ -21,7 +21,7 @@
                     <p class="text-center" style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
                 <form id="formInputOutletWilayah" method="POST" action="<?php echo site_url('outlet/add_process_wilayah'); ?>" data-parsley-validate class="form-horizontal form-label-left">
-                    <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>">
+                    <!-- <input type="hidden" name="auth_token" value="<?php echo $auth_token; ?>"> -->
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kodewilayah">Kode Wilayah</label>
                         <div class="col-md-6 col-sm-6 ">
@@ -43,17 +43,33 @@
                             <div class="errorTxt3" style="color:red"></div>
                         </div>
                     </div>
-                    <div class="item form-group">
+                    <!-- <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="enddate">End Date</label>
                         <div class="col-md-6 col-sm-6 ">
                             <input type="text" id="enddate" name="enddate" class="form-control" style="border-radius: 6px" placeholder="dd/mm/yyyy" data-error=".errorTxt4">
                             <div class="errorTxt4" style="color:red"></div>
                         </div>
+                    </div> -->
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="productdesc">Status Produk</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="statuswilayah" name="status" data-error=".errorTxt3" value="1"> Aktif
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="statuswilayah" name="status" data-error=".errorTxt3" value="0"> Tidak Aktif
+                                </label>
+                            </div>
+                            <div class="errorTxt3" style="color:red"></div>
+                        </div>
                     </div>
                     <div class="ln_solid"></div>
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 offset-md-3">
-                            <button class="btn btn-secondary" type="button" value="Cancel" id="btnCancel" form="formInputOutletWilayah">Cancel</button>
+                            <a class="btn btn-secondary" href="<?php echo site_url('outlet/wilayah'); ?>" value="Cancel" id="btnCancel" form="formInputOutletWilayah">Cancel</a>
                             <button class="btn btn-success" type="submit" value="Submit" form="formInputOutletWilayah">Submit</button>
                         </div>
                     </div>
@@ -67,4 +83,4 @@
     <!-- /top tiles -->
     <br />
 </div>
-<!-- /page content-->
+<!-- /page content

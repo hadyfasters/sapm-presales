@@ -53,7 +53,6 @@ class Product extends SAM_Controller {
     public function add()
     {
         $this->data['error_message'] = $this->session->flashdata('error_message');
-        $this->data['auth_token'] = $this->getAuthToken();
         $this->data['content'] = 'productmanagement/input-product';
 
         $this->data['javascriptLoad'] = array(
@@ -67,7 +66,6 @@ class Product extends SAM_Controller {
     public function edit($id)
     {
         $this->data['error_message'] = $this->session->flashdata('error_message');
-        $this->data['auth_token'] = $this->getAuthToken();
         $this->data['content'] = 'productmanagement/edit-product';
 
         $this->data['id'] = $id;
@@ -99,7 +97,6 @@ class Product extends SAM_Controller {
             'product_name' => $productname,
             'product_desc' => $productdesc,
             'status' => 1,
-            'auth_token' => $auth_token,
             'user' => $this->data['userdata']['nama']
         ];
         $product = $this->client_url->postCURL(PRODUCT_CREATE,$this->secure($dt_product),$this->data['userdata']['token']); 
@@ -126,8 +123,7 @@ class Product extends SAM_Controller {
             'id' => $id,
             'product_name' => $productname,
             'product_desc' => $productdesc,
-            'status' => $productstatus,
-            'auth_token' => $auth_token
+            'status' => $productstatus
         ];
         $product = $this->client_url->postCURL(PRODUCT_UPDATE,$this->secure($dt_product),$this->data['userdata']['token']); 
         $product = json_decode($product);

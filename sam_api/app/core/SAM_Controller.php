@@ -22,7 +22,10 @@ class SAM_Controller extends CI_Controller{
 
     public function run($crypt=false)
     {
-        if($crypt && $this->response['status']) $this->response = $this->secure($this->response);
+        if($crypt && $this->response['status']){
+            unset($this->response['message']);
+            $this->response = $this->secure($this->response);
+        } 
 
         $this->output
             ->set_status_header($this->response_code)

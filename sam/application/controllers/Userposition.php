@@ -57,7 +57,6 @@ class Userposition extends SAM_Controller {
     public function add()
     {
         $this->data['error_message'] = $this->session->flashdata('error_message');
-        $this->data['auth_token'] = $this->getAuthToken();
         $this->data['content'] = 'userposition/input-user-position';
 
         $this->data['javascriptLoad'] = array(
@@ -71,7 +70,6 @@ class Userposition extends SAM_Controller {
     public function edit($id)
     {
         $this->data['error_message'] = $this->session->flashdata('error_message');
-        $this->data['auth_token'] = $this->getAuthToken();
         $this->data['content'] = 'userposition/edit-user-position';
 
         $this->data['id'] = $id;
@@ -100,7 +98,6 @@ class Userposition extends SAM_Controller {
             'title' => $userposition_title,
             'level' => 0,
             'default_password' => $default_password,
-            'auth_token' => $auth_token,
             'is_active' => 0,
             'user' => $this->data['userdata']['nama']
         ];
@@ -129,7 +126,6 @@ class Userposition extends SAM_Controller {
             'title' => $userposition_title,
             'level' => 0,
             'default_password' => $default_password,
-            'auth_token' => $auth_token,
             // 'is_active' => 0,
         ];
         $userposition = $this->client_url->postCURL(USERPOSITION_UPDATE,$this->secure($dt_userposition),$this->data['userdata']['token']); 

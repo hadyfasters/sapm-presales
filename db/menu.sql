@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-06-18 17:22:38
+Date: 2020-06-22 14:44:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,17 +47,17 @@ INSERT INTO `menu` VALUES ('11', 'Lead', 'lead', null, '2', '1', '');
 INSERT INTO `menu` VALUES ('12', 'Call', 'call', null, '2', '2', '');
 INSERT INTO `menu` VALUES ('13', 'Meet', 'meet', null, '2', '3', '');
 INSERT INTO `menu` VALUES ('14', 'Close', 'close', null, '2', '4', '');
-INSERT INTO `menu` VALUES ('15', 'Activity Report', null, null, '6', null, '');
-INSERT INTO `menu` VALUES ('16', 'Performance Report', null, null, '6', null, '');
+INSERT INTO `menu` VALUES ('15', 'Activity Report', 'report/activityreport', null, '6', null, '');
+INSERT INTO `menu` VALUES ('16', 'Performance Report', 'report/performancereport', null, '6', null, '');
 INSERT INTO `menu` VALUES ('17', 'Produk Chart', 'dashboard/produkchart', null, '1', '1', '');
 INSERT INTO `menu` VALUES ('18', 'Proses Chart', 'dashboard/proseschart', null, '1', '1', '');
 INSERT INTO `menu` VALUES ('19', 'Wilayah', 'outlet/wilayah', null, '8', '3', '');
 INSERT INTO `menu` VALUES ('20', 'Cabang', 'outlet/cabang', null, '8', '3', '');
-INSERT INTO `menu` VALUES ('21', 'User History', null, null, '9', null, '');
+INSERT INTO `menu` VALUES ('21', 'User History', 'user_history', null, '9', null, '');
 INSERT INTO `menu` VALUES ('22', 'Activity Log', null, null, '9', null, '');
 INSERT INTO `menu` VALUES ('23', 'Location History', null, null, '9', null, '');
 INSERT INTO `menu` VALUES ('24', 'Menu Management', 'menu', null, '10', '8', '');
-INSERT INTO `menu` VALUES ('25', 'Message Management', 'message', null, '10', '9', '');
+INSERT INTO `menu` VALUES ('25', 'Message Management', 'message', null, '10', '9', '');
 INSERT INTO `menu` VALUES ('26', 'User Position', 'userposition', null, '10', '2', '');
 INSERT INTO `menu` VALUES ('27', 'Produk Sumber Dana', 'product', null, '10', '2', '');
 INSERT INTO `menu` VALUES ('28', 'Master Data', '#', null, '0', '10', '');

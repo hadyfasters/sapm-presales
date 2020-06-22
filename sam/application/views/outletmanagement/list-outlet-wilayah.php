@@ -17,7 +17,9 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <?php if (isset($error_message)): ?>
+                <?php 
+                echo $error_message;
+                if (isset($error_message)): ?>
                     <p class="text-center" style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
                 <div class="row">
@@ -30,7 +32,7 @@
                                         <th>Kode Wilayah</th>
                                         <th>Nama Wilayah</th>
                                         <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -44,7 +46,7 @@
                                             echo '<td>'.strtoupper($reg->code).'</td>';
                                             echo '<td>'.$reg->name.'</td>';
                                             echo '<td>'.$reg->start_date.'</td>';
-                                            echo '<td>'.$reg->end_date.'</td>';
+                                            echo '<td>'.($reg->status==1?'Aktif':'Tidak Aktif').'</td>';
                                             echo '<td>';
                                             echo '<div class="row">';
                                             echo '<div class="offset-sm-3 col-sm-3 col-md-3 ">';

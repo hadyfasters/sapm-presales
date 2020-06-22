@@ -6,10 +6,6 @@ class Report extends SAM_Controller {
     public function __construct()
 	{
 		parent::__construct();
-		// $this->load->helper('form');
-		$this->load->library('session');
-        $this->load->model('M_menu');       
-        // $this->load->model('M_login');  
 
         if(!$this->isLogin){
             redirect('login/out');
@@ -21,12 +17,11 @@ class Report extends SAM_Controller {
         redirect('report/activityreport');
     }
 
-    public function activityreport() {
-        $data['userdata'] = $this->session->userdata('data_login');
-        $data['menu_parent'] = $this->M_menu->getMenuParentByRole((int)$data['userdata']['id_role']);
-        $data['content'] = 'report/activity-report';
+    public function activityreport() 
+    {
+        $this->data['content'] = 'report/activity-report';
 
-        $data['javascriptLoad'] = array(
+        $this->data['javascriptLoad'] = array(
             1 => 'assets/vendors/moment/min/moment.min.js',
             2 => 'assets/vendors/bootstrap-daterangepicker/daterangepicker.js',
             3 => 'assets/vendors/datatables.net/js/jquery.dataTables.min.js',
@@ -44,15 +39,14 @@ class Report extends SAM_Controller {
             15 => 'assets/build/js/report.js'
         );
 
-        $this->load->view('template', $data);
+        $this->load->view('template', $this->data);
     }
 
-    public function performancereport() {
-        $data['userdata'] = $this->session->userdata('data_login');
-        $data['menu_parent'] = $this->M_menu->getMenuParentByRole((int)$data['userdata']['id_role']);
-        $data['content'] = 'report/performance-report';
+    public function performancereport() 
+    {
+        $this->data['content'] = 'report/performance-report';
 
-        $data['javascriptLoad'] = array(
+        $this->data['javascriptLoad'] = array(
             1 => 'assets/vendors/datatables.net/js/jquery.dataTables.min.js',
             2 => 'assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
             3 => 'assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js',
@@ -68,7 +62,7 @@ class Report extends SAM_Controller {
             13 => 'assets/build/js/report.js'
         );
 
-        $this->load->view('template', $data);
+        $this->load->view('template', $this->data);
     }
 
     

@@ -28,52 +28,38 @@
                                         <th>Wilayah</th>
                                         <th>Cabang/Divisi</th>
                                         <th>Jabatan</th>
+                                        <th>Status</th>
                                         <th>Action</th>	  
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>89956</td>
-                                        <td><a href="<?php echo site_url('user/detail')?>" title="User Detail">Ramadhan Nugraha</a></td>
-                                        <td>Jabodetabek</td>
-                                        <td>KC Fatmawati</td>
-                                        <td>Back Office Head</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="offset-sm-1 col-sm-3 col-md-3 ">
-                                                    <a href="<?php echo site_url('user/edit') ?>"><i class="fa fa-pencil" title="Edit"></i></a>
-                                                </div>
-                                                <div class="col-sm-3 col-md-3">
-                                                    <a href=""><i id="deleteBtn" class="fa fa-trash" title="Delete"></i></a>
-                                                </div>
-                                                <div class="col-sm-3 col-md-3">
-                                                    <a href=""><i class="fa fa-key" title="Reset Password"></i></a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>87335</td>
-                                        <td><a href="<?php echo site_url('user/detail')?>" title="User Detail">Annisa Hapsari</a></td>
-                                        <td>Jabodetabek</td>
-                                        <td>KCP Tanah Sareal</td>
-                                        <td>Sales Assistant</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="offset-sm-1 col-sm-3 col-md-3 ">
-                                                    <a href="<?php echo site_url('user/edit') ?>"><i class="fa fa-pencil" title="Edit"></i></a>
-                                                </div>
-                                                <div class="col-sm-3 col-md-3">
-                                                    <a href=""><i id="deleteBtn" class="fa fa-trash" title="Delete"></i></a>
-                                                </div>
-                                                <div class="col-sm-3 col-md-3">
-                                                    <a href=""><i class="fa fa-key" title="Reset Password"></i></a>
-                                                </div>
-                                            </div>
-                                        </td>	
-                                    </tr>
+                                    <?php 
+                                    if(isset($user_list) && !empty($user_list)) : 
+                                        $no = 1;
+                                        foreach ($user_list as $usr) {
+                                            echo '<tr>';
+                                            echo '<td>'.$no.'</td>';
+                                            echo '<td>'.$usr->npp.'</td>';
+                                            echo '<td>'.$usr->nama.'</td>';
+                                            echo '<td>'.$usr->region_code.'</td>';
+                                            echo '<td>'.$usr->branch_code.'</td>';
+                                            echo '<td>'.$usr->position_name.'</td>';
+                                            echo '<td>'.($usr->is_active?'Aktif':'Tidak Aktif').'</td>';
+                                            echo '<td>';
+                                            echo '<div class="row">';
+                                            echo '<div class="offset-sm-3 col-sm-3 col-md-3 ">';
+                                            echo '<a href="'.site_url('user/edit/'.$usr->id_user).'" ><i class="fa fa-pencil" title="Edit"></i></a>';
+                                            echo '</div>';
+                                            echo '<div class="col-sm-3 col-md-3">';
+                                            echo '<a href="'.site_url('user/remove/'.$usr->id_user).'" onclick="return confirm(\'Are you sure to remove this?\')"><i id="deleteBtn" class="fa fa-trash" title="Hapus"></i></a>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                            echo '</td>';
+
+                                            $no++;
+                                        }
+                                    endif;
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

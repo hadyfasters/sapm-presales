@@ -33,6 +33,18 @@ class M_regencies extends SAM_Model {
         }
     }
 
+    public function getByProvince($id)
+    {
+        $this->_where = "province_id = {$id}";
+
+        $result = $this->_get();
+
+        if ($result->num_rows() > 0) 
+        {
+            return $result->result();
+        }
+    }
+
 }
 
 
