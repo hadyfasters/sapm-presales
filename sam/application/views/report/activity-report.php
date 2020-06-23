@@ -20,8 +20,8 @@
                             <div class="col-md-9 col-sm-9 ">
                                 <select style="border-radius: 6px; color: #495057;" id="datasummary" name="datasummary" class="form-control" required>
                                     <option value="">Pilih Data Summary..</option>
-                                    <option value="press">Kategori Nasabah 1</option>
-                                    <option value="net">Kategori Nasabah 1</option>
+                                    <option value="press">Data Success</option>
+                                    <option value="net">Data Remain</option>
                                 </select>
                             </div>
                         </div>
@@ -30,8 +30,9 @@
                             <div class="col-md-9 col-sm-9 ">
                             <select style="border-radius: 6px; color: #495057;" id="proses" name="proses" class="form-control" required>
                                 <option value="">Pilih Proses..</option>
-                                <option value="press">Kategori Nasabah 1</option>
-                                <option value="net">Kategori Nasabah 1</option>
+                                <option value="press">Lead</option>
+                                <option value="net">Call</option>
+                                <option value="net">Meet</option>
                             </select>
                             </div>
                         </div>
@@ -108,20 +109,56 @@
                                         <th>No.</th>
                                         <th>Nama Prospect</th>
                                         <th>Jenis Nasabah</th>
+                                        <th>Alamat</th>
+                                        <th>Contact Person</th>
+                                        <th>No. Contact</th>
                                         <th>Potensi Dana Masuk</th>
-                                        <th>Realisasi Dana Masuk</th>
-                                        <th>Realisasi</th>
-                                        <th>Produk Dana</th>
-                                        <th>Date & Time Close</th>
-                                        <th>Date & Time Inputed</th>
+                                        <th>Produk Sumber Dana</th>
+                                        <th>Kategori Nasabah</th>
+                                        <th>Additional Info</th>
+                                        <th>Date & Time Inputted</th>
                                         <th>Action</th>	  
-                                        <th>Attach</th>	  
-                                        <th>History Lead</th>	  
-                                        <th>History Call</th>	  
-                                        <th>History Meet</th>	  
+                                        <th>FU Call</th>	  
+                                        <th>FU Meet</th>	  
+                                        <th>FU Close</th>	   
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <?php 
+                                    if(isset($activity_report_data) && !empty($activity_report_data)) : 
+                                        $no = 1;
+                                        foreach ($activity_report_data as $activity_report) {
+                                            echo '<tr>';
+                                            echo '<td width="5%">'.$no.'</td>';
+                                            echo '<td>'.$activity_report->nama_prospek.'</td>';
+                                            echo '<td>'.($activity_report->jenis_nasabah==1?'Perorangan':'Institusi').'</td>';
+                                            echo '<td>'.$activity_report->alamat.'</td>';
+                                            echo '<td>'.$activity_report->kontak_person.'</td>';
+                                            echo '<td>'.$activity_report->no_kontak.'</td>';
+                                            echo '<td>'.number_format($activity_report->potensi_dana).'</td>';
+                                            echo '<td>'.$activity_report->product_name.'</td>';
+                                            echo '<td>'.($activity_report->kategori_nasabah==1?'New':'Existing').'</td>';
+                                            echo '<td>'.$activity_report->additional_info.'</td>';
+                                            echo '<td>'.date('d-m-Y',strtotime($activity_report->created_date)). ' ' .date('H:i:s',strtotime($activity_report->created_date)). ' by ' . $activity_report->created_by . '</td>';
+                                            echo '<td>';
+                                            echo '<div class="dropdown">';
+                                            echo '<a class="btn btn-secondary dropdown-toggle btn-sm" href="#" role="button" id="dropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></a>';
+                                            echo '<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownLink">';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/view/'.$lead->lead_id).'"><i class="fa fa-eye" title="Edit"></i> View</a>';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/edit/'.$lead->lead_id).'"><i class="fa fa-pencil" title="Edit"></i> Edit</a>';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/approve/'.$lead->lead_id).'" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fa fa-check" title="Edit"></i> Approve</a>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                            echo '</td>';
+                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_call_date)).'</td>';
+                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_meet_date)).'</td>';
+                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_close_date)).'</td>';                                            
+                                            echo '</tr>';
+                                            $no++;
+                                        }
+                                    endif;
+                                    ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>

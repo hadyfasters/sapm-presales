@@ -6,6 +6,7 @@ class Report extends SAM_Controller {
     public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('session');     
 
         if(!$this->isLogin){
             redirect('login/out');
@@ -19,6 +20,28 @@ class Report extends SAM_Controller {
 
     public function activityreport() 
     {
+        $path = ACTIVITY_REPORT;
+        $search = '';
+        // if(!empty($this->input->post())){
+        //     $forms = [
+        //         'produk' => $this->input->post('produksumberdana'),
+        //         'nama_prospek' => $this->input->post('namaprospek'),
+        //         'kategori_nasabah' => $this->input->post('kategorinasabah'),
+        //         'jenis_nasabah' => $this->input->post('jenisnasabah')
+        //     ];
+        //     $search = $this->secure($forms);
+        //     $this->data['search'] = $forms;
+        // }
+
+        $leads = $this->client_url->postCURL($path,$search,$this->data['userdata']['token']);   
+        if($leads!=null && !isset($leads->status)){
+            // Decrypt the response
+            $leads = json_decode($this->recure($leads));
+        }
+        if(isset($leads->status) && $leads->status)
+        {
+            $this->data['activity_report_data'] = $leads->data;
+        }
         $this->data['content'] = 'report/activity-report';
 
         $this->data['javascriptLoad'] = array(
