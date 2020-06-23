@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-06-18 17:21:24
+Date: 2020-06-23 09:14:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,11 +25,11 @@ CREATE TABLE `dt_lead` (
   `nama_prospek` varchar(255) DEFAULT NULL,
   `jenis_nasabah` int(11) DEFAULT NULL,
   `alamat` longtext,
-  `provinsi` int(11) DEFAULT NULL,
-  `kota_kabupaten` int(11) DEFAULT NULL,
-  `kecamatan` int(11) DEFAULT NULL,
-  `kelurahan` int(11) DEFAULT NULL,
-  `no_kontak` int(11) DEFAULT NULL,
+  `provinsi` char(11) DEFAULT NULL,
+  `kota_kabupaten` char(11) DEFAULT NULL,
+  `kecamatan` char(11) DEFAULT NULL,
+  `kelurahan` char(11) DEFAULT NULL,
+  `no_kontak` varchar(15) DEFAULT NULL,
   `potensi_dana` int(11) DEFAULT NULL,
   `produk` int(11) DEFAULT NULL,
   `approval` int(11) DEFAULT NULL,
@@ -39,8 +39,10 @@ CREATE TABLE `dt_lead` (
   `created_date` datetime DEFAULT NULL,
   `created_by` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`lead_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of dt_lead
 -- ----------------------------
+INSERT INTO `dt_lead` VALUES ('1', '1', 'Hadi', '1', 'Pamulang', '36', '3674', '3674030', '2147483647', '085263777130', '1000000', '1', '1', 'Muhammad Hadiansyah', '', '2020-06-22 18:26:17', '2020-06-22 00:00:00', 'Muhammad Hadiansyah');
+INSERT INTO `dt_lead` VALUES ('2', '1', 'Hadi 2', '1', 'Pamulang', '36', '3674', '3674030', '2147483647', '085263777130', '1000000', '1', null, null, null, null, '2020-06-22 00:00:00', 'Muhammad Hadiansyah');

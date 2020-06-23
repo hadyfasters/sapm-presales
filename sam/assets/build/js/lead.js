@@ -16,8 +16,74 @@ $(document).ready(function() {
     }
 });
 
+$('#provinsi').on('change',function(){
+    var provinsi = $(this).val();
+    $.ajax({
+        url : './getRegency',
+        type : 'POST',
+        data : {
+            'province':provinsi
+        },
+        success:function(result){
+            var html = '';
+            $.each(result,function(i,v){
+                html += '<option value="'+v.id+'">'+v.name+'</option>';
+            });
+            $('#kota')
+                .find('option:not(:first)')
+                .remove()
+                .end()
+                .append(html);
+        }
+    })
+});
+
+$('#kota').on('change',function(){
+    var regency = $(this).val();
+    $.ajax({
+        url : './getDistrict',
+        type : 'POST',
+        data : {
+            'regency':regency
+        },
+        success:function(result){
+            var html = '';
+            $.each(result,function(i,v){
+                html += '<option value="'+v.id+'">'+v.name+'</option>';
+            });
+            $('#kecamatan')
+                .find('option:not(:first)')
+                .remove()
+                .end()
+                .append(html);
+        }
+    })
+});
+
+$('#kecamatan').on('change',function(){
+    var district = $(this).val();
+    $.ajax({
+        url : './getVillage',
+        type : 'POST',
+        data : {
+            'district':district
+        },
+        success:function(result){
+            var html = '';
+            $.each(result,function(i,v){
+                html += '<option value="'+v.id+'">'+v.name+'</option>';
+            });
+            $('#kelurahan')
+                .find('option:not(:first)')
+                .remove()
+                .end()
+                .append(html);
+        }
+    })
+});
+
 function getDataLead() {
-	$('#dataLead').DataTable();  
+	$('#dataLead').DataTable({searching: false});  
 }
 
 function getDataApproveLead() {
@@ -111,35 +177,32 @@ function formInputLeadValidation(){
                 error.insertAfter(element);
             }
         },
-        submitHandler: function(form) {
-            alert("submitted");
-            console.log(form);
-        //     $.ajax({
-        //         url : '/' + base_url[1] + '/' + base_url[2] + '/meeting/save',
-        //         type: 'POST',
-        //         data: new FormData(form),
-        //         mimeType: "multipart/form-data",
-        //         contentType: false,
-        //         cache: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             data = JSON.parse(response);
-                    
-        //             if (data.status) {
-        //                 swal("Sukses!", data.message, "success");
-        //                 table.destroy();
-        //                 table = getDatatableData();
-        //             } else {
-        //                 swal({
-        //                     title: data.errorDescriptions,
-        //                     icon: 'error'
-        //                 });
-        //             }
-    
-        //             $('#modalAdd').modal('close');
+        // submitHandler: function(form) {
+        //     var object = {};
+        //     var formData = $('form#formInputLead').serializeArray();
+        //     formData.forEach((value, key) => {
+        //         // Reflect.has in favor of: object.hasOwnProperty(key)
+        //         if(!Reflect.has(object, key)){
+        //             object[key] = value;
+        //             return;
         //         }
+        //         if(!Array.isArray(object[key])){
+        //             object[key] = [object[key]];    
+        //         }
+        //         object[key].push(value);
         //     });
-        }
+        //     var json = JSON.stringify(object);
+        //     console.log(json);
+            // $.ajax({
+            //     url : './saveLead',
+            //     type: 'POST',
+            //     data: JSON.stringify(formdata),
+            //     contentType: 'application/json',
+            //     success: function(response) {
+            //         console.log(response);
+            //     }
+            // });
+        // }
     });
 }
 
@@ -242,9 +305,9 @@ function formEditLeadValidation(){
                 error.insertAfter(element);
             }
         },
-        submitHandler: function(form) {
-            alert("submitted");
-            console.log(form);
+        // submitHandler: function(form) {
+        //     alert("submitted");
+        //     console.log(form);
         //     $.ajax({
         //         url : '/' + base_url[1] + '/' + base_url[2] + '/meeting/save',
         //         type: 'POST',
@@ -270,6 +333,15 @@ function formEditLeadValidation(){
         //             $('#modalAdd').modal('close');
         //         }
         //     });
-        }
+        // }
     });
+}
+
+function resetForm()
+{
+    alert("Masuk nih 1");
+    $('select#produksumberdana').prop('selectedIndex', -1);
+    $('input#namaprospek').val(" ");
+    $('select#kategorinasabah').prop('selectedIndex', -1);
+    $('select#jenisnasabah').prop('selectedIndex', -1);
 }

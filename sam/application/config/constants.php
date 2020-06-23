@@ -139,6 +139,15 @@ define('USER_UPDATE','user/update');
 define('PROVINCE_LIST','address/list_province');
 define('REGENCY_LIST','address/list_regency');
 define('DISTRICT_LIST','address/list_district');
+define('VILLAGE_LIST','address/list_village');
 
 // Endpoint USER HISTORY
 define('USERHISTORY_LIST','user/history_lists');
+
+// Endpoint LEAD
+define('LEAD_LIST','lead/lists');
+define('LEAD_SEARCH','lead/get');
+define('LEAD_GET','lead/detail');
+define('LEAD_CREATE','lead/create');
+define('LEAD_UPDATE','lead/update');
+define('LEAD_APPROVE','lead/approval');

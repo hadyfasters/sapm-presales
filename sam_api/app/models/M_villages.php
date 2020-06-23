@@ -33,6 +33,18 @@ class M_villages extends SAM_Model {
         }
     }
 
+    public function getByDistrict($id)
+    {
+        $this->_where = "district_id = {$id}";
+
+        $result = $this->_get();
+
+        if ($result->num_rows() > 0) 
+        {
+            return $result->result();
+        }
+    }
+
 }
 
 

@@ -17,17 +17,16 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <form id="formInputLead" data-parsley-validate class="form-horizontal form-label-left">
+                <form id="formInputLead" method="POST" action="<?php echo site_url('lead/saveData'); ?>" data-parsley-validate class="form-horizontal form-label-left">
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kategorinasabah">Kategori Nasabah</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="kategorinasabah" name="kategorinasabah" class="form-control" data-error=".errorTxt1" >
                                 <option value="">Kategori Nasabah</option>
-                                <option value="press">Kategori Nasabah 1</option>
-                                <option value="net">Kategori Nasabah 1</option>
+                                <option value="1">New</option>
+                                <option value="2">Existing</option>
                             </select>
                             <div class="errorTxt1" style="color:red"></div>
-                            <!-- <div id="kategorinasabah_validate" style="display: none;color: red;">please enter kategori nasabah</div> -->
                         </div>
                     </div>
                     <div class="item form-group">
@@ -41,9 +40,9 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="jenisnasabah">Jenis Nasabah</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="jenisnasabah" name="jenisnasabah" class="form-control" data-error=".errorTxt3">
-                                <option value="">Pilih Jenis Nasabah..</option>
-                                <option value="press">Jenis Nasabah 1</option>
-                                <option value="net">Jenis Nasabah 2</option>
+                                <option value="">Pilih Jenis Nasabah</option>
+                                <option value="1">Perorangan</option>
+                                <option value="2">Institusi</option>
                             </select>
                             <div class="errorTxt3" style="color:red"></div>
                         </div>
@@ -59,9 +58,12 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="provinsi">Provinsi</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="provinsi" name="provinsi" class="form-control" data-error=".errorTxt5">
-                                <option value="">Pilih Provinsi..</option>
-                                <option value="press">Provinsi 1</option>
-                                <option value="net">Provinsi 2</option>
+                                <option value="">Pilih Provinsi</option>
+                                <?php if(isset($province_list) && !empty($province_list)) : 
+                                    foreach ($province_list as $prv) {
+                                        echo '<option value="'.$prv->id.'">'.$prv->name.'</option>';
+                                    }
+                                endif; ?>
                             </select>
                             <div class="errorTxt5" style="color:red"></div>
                         </div>
@@ -70,9 +72,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kota">Kota/Kabupaten</label>
                         <div class="col-md-6 col-sm-6 ">
                         <select style="border-radius: 6px; color: #495057;" id="kota" name="kota" class="form-control" data-error=".errorTxt6">
-                            <option value="">Pilih Kota/Kabupaten..</option>
-                            <option value="press">Kota/Kabupaten 1</option>
-                            <option value="net">Kota/Kabupaten 2</option>
+                            <option value="">Pilih Kota/Kabupaten</option>
                         </select>
                         <div class="errorTxt6" style="color:red"></div>
                         </div>
@@ -81,9 +81,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kecamatan">Kecamatan</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="kecamatan" name="kecamatan" class="form-control" data-error=".errorTxt7">
-                                <option value="">Pilih Kecamatan..</option>
-                                <option value="press">Kecamatan 1</option>
-                                <option value="net">Kecamatan 2</option>
+                                <option value="">Pilih Kecamatan</option>
                             </select>
                             <div class="errorTxt7" style="color:red"></div>
                         </div>
@@ -92,9 +90,7 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="kelurahan">Kelurahan</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="kelurahan" name="kelurahan" class="form-control" data-error=".errorTxt8">
-                                <option value="">Pilih Kelurahan..</option>
-                                <option value="press">Kelurahan 1</option>
-                                <option value="net">Kelurahan 2</option>
+                                <option value="">Pilih Kelurahan</option>
                             </select>
                             <div class="errorTxt8" style="color:red"></div>
                         </div>
@@ -106,13 +102,13 @@
                             <div class="errorTxt9" style="color:red"></div>
                         </div>
                     </div>
-                    <div class="item form-group">
+                    <!-- <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="contactnumber">Contact Number</label>
                         <div class="col-md-6 col-sm-6 ">
                             <input type="text" id="contactnumber" name="contactnumber" class="form-control" style="border-radius: 6px" placeholder="Contact Number" data-error=".errorTxt10">
                             <div class="errorTxt10" style="color:red"></div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="potensidana">Potensi Dana Masuk</label>
                         <div class="col-md-6 col-sm-6 ">
@@ -124,9 +120,12 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="produksumberdana">Produk Sumber Dana</label>
                         <div class="col-md-6 col-sm-6 ">
                             <select style="border-radius: 6px; color: #495057;" id="produksumberdana" name="produksumberdana" class="form-control" data-error=".errorTxt12">
-                                <option value="">Pilih Sumber Dana..</option>
-                                <option value="press">Sumber Dana 1</option>
-                                <option value="net">Sumber Dana 2</option>
+                                <option value="">Pilih Produk</option>
+                                <?php if(isset($product_list) && !empty($product_list)) : 
+                                    foreach ($product_list as $prd) {
+                                        echo '<option value="'.$prd->product_id.'">'.$prd->product_name.'</option>';
+                                    }
+                                endif; ?>
                             </select>
                             <div class="errorTxt12" style="color:red"></div>
                         </div>
@@ -140,7 +139,7 @@
                     <div class="ln_solid"></div>
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 offset-md-3">
-                            <button class="btn btn-primary" type="button" value="Save" id="btnSaveLead" form="formInputLead">Save</button>
+                            <a class="btn btn-secondary" type="button" href="<?php echo site_url('user'); ?>" value="Cancel" id="btnCancel" form="formInputLead">Cancel</a>
                             <button class="btn btn-success" type="submit" value="Submit" form="formInputLead">Submit</button>
                         </div>
                     </div>

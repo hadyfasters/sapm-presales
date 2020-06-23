@@ -13,12 +13,41 @@ class M_lead extends SAM_Model {
 
     public function getAll()
     {
+        $this->db->order_by('lead_id DESC');
         $result = $this->_get();
 
         if ($result->num_rows() > 0) 
 		{
 			return $result->result();
 		}
+    }
+
+    public function getSearch($data)
+    {
+        $where = [];
+        if(!empty($data)){
+            foreach ($data as $key => $value) {
+                if(!empty($value) && $key!='nama_prospek'){
+                    $where[$key] = $value;
+                }
+            }
+        }
+
+        if($where){
+            $this->_where = $where;
+        }
+
+        if($data->nama_prospek){
+            $this->db->like('nama_prospek',$data->nama_prospek);
+        }
+
+        $this->db->order_by('lead_id DESC');
+        $result = $this->_get();
+
+        if ($result->num_rows() > 0) 
+        {
+            return $result->result();
+        }
     }
 
     public function getByID($id)
