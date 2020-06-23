@@ -93,6 +93,3 @@ define('SAM_API_URL','localhost/sam_api/api/');
 // Endpoint LOGIN
 define('AUTH_TOKEN_PATH','auth/token');
 define('AUTH_LOGIN_CHECK','auth/check');
-
-// Endpoint REPORT
-define('ACTIVITY_REPORT','report/activity');

@@ -150,9 +150,9 @@
                                             echo '</div>';
                                             echo '</div>';
                                             echo '</td>';
-                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_call_date)).'</td>';
-                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_meet_date)).'</td>';
-                                            echo '<td>'.date('H:i:s',strtotime($activity_report->fu_close_date)).'</td>';                                            
+                                            echo '<td>'.date('d-m-Y',strtotime($activity_report->fu_call_date)).'</td>';
+                                            echo '<td>'.date('d-m-Y',strtotime($activity_report->fu_meet_date)).'</td>';
+                                            echo '<td>'.date('d-m-Y',strtotime($activity_report->fu_close_date)).'</td>';                                            
                                             echo '</tr>';
                                             $no++;
                                         }

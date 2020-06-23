@@ -151,3 +151,6 @@ define('LEAD_GET','lead/detail');
 define('LEAD_CREATE','lead/create');
 define('LEAD_UPDATE','lead/update');
 define('LEAD_APPROVE','lead/approval');
+
+// Endpoint REPORT
+define('ACTIVITY_REPORT','report/activity');

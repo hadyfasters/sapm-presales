@@ -33,7 +33,7 @@ class Report extends SAM_Controller {
         //     $this->data['search'] = $forms;
         // }
 
-        $leads = $this->client_url->postCURL($path,$search,$this->data['userdata']['token']);   
+        $leads = $this->client_url->postCURL($path,$search,$this->data['userdata']['token']);
         if($leads!=null && !isset($leads->status)){
             // Decrypt the response
             $leads = json_decode($this->recure($leads));
@@ -42,6 +42,7 @@ class Report extends SAM_Controller {
         {
             $this->data['activity_report_data'] = $leads->data;
         }
+        
         $this->data['content'] = 'report/activity-report';
 
         $this->data['javascriptLoad'] = array(

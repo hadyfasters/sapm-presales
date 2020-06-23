@@ -8,7 +8,7 @@ class Report extends SAM_Controller
 		// Load the Model
         $this->load->model('M_report');   
         // Verify Login
-        //$this->is_login = $this->verify_login();     
+        //$this->is_login = $this->verify_login(); 
         $this->is_login = true;
 	}
 
@@ -20,7 +20,7 @@ class Report extends SAM_Controller
 			// Set Response
 			$this->response_code = 200;
 			$this->response['status'] = TRUE;
-			$this->response['data'] = $activityData;
+            $this->response['data'] = $activityData;
         }
 		// Run the Application
 		$this->run(SECURED);
