@@ -144,9 +144,9 @@
                                             echo '<div class="dropdown">';
                                             echo '<a class="btn btn-secondary dropdown-toggle btn-sm" href="#" role="button" id="dropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gear"></i></a>';
                                             echo '<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownLink">';
-                                            echo '<a class="dropdown-item" href="'.site_url('lead/view/'.$lead->lead_id).'"><i class="fa fa-eye" title="Edit"></i> View</a>';
-                                            echo '<a class="dropdown-item" href="'.site_url('lead/edit/'.$lead->lead_id).'"><i class="fa fa-pencil" title="Edit"></i> Edit</a>';
-                                            echo '<a class="dropdown-item" href="'.site_url('lead/approve/'.$lead->lead_id).'" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fa fa-check" title="Edit"></i> Approve</a>';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/view/'.$activity_report->lead_id).'"><i class="fa fa-eye" title="Edit"></i> View</a>';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/edit/'.$activity_report->lead_id).'"><i class="fa fa-pencil" title="Edit"></i> Edit</a>';
+                                            echo '<a class="dropdown-item" href="'.site_url('lead/approve/'.$activity_report->lead_id).'" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fa fa-check" title="Edit"></i> Approve</a>';
                                             echo '</div>';
                                             echo '</div>';
                                             echo '</td>';
